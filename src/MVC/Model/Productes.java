@@ -1,3 +1,5 @@
+package MVC.Model;
+
 public abstract class Productes {
     private String nom;
     private float preu;

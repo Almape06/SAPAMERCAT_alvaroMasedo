@@ -12,4 +12,14 @@ public class Vista {
         System.out.println("4) Mostrar carret de compra");
         System.out.println("0) Acabar");
     }
+
+    public static void mostrarMenuGestioMagatzem(){
+        System.out.println("-------------------------");
+        System.out.println("---MAGATZEM I COMPRES---");
+        System.out.println("-------------------------");
+        System.out.println("1) Caducitat");
+        System.out.println("2) Tiquets de Compra");
+        System.out.println("3) Composició Tèxtil");
+        System.out.println("0) Tornar");
+    }
 }

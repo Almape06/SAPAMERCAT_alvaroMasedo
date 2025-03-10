@@ -1,9 +1,14 @@
+package MVC.Model;
+
 import java.time.LocalDate;
 import java.time.Period;
+
+
 import static java.time.LocalDate.now;
 
-public abstract class Alimentacio extends Productes implements CalcularData{
+public abstract class Alimentacio extends Productes implements CalcularData {
     private LocalDate data_caducitat;
+
 
     public Alimentacio(String nom, float preu, int codi_barres, LocalDate data_caducitat) {
         super(nom, preu, codi_barres);

@@ -1,4 +1,6 @@
-public class Electronica extends Productes implements CalcularData{
+package MVC.Model;
+
+public class Electronica extends Productes implements CalcularData {
     private int garantia;
 
     public Electronica(String nom, float preu, int codi_barres, int garantia) {

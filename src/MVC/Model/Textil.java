@@ -1,3 +1,5 @@
+package MVC.Model;
+
 public class Textil extends Productes {
     private String composicio;
 

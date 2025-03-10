@@ -1,4 +1,4 @@
-import java.util.Date;
+package MVC.Model;
 
 public interface CalcularData {
     float calcularData();
