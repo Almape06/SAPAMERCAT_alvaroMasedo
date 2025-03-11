@@ -15,4 +15,14 @@ public class Textil extends Productes {
     public void setComposicio(String composicio) {
         this.composicio = composicio;
     }
+
+    @Override
+    public String toString() {
+        return "Textil{ " +
+                ", nom='" + nom + '\'' +
+                ", preu=" + preu +
+                "€ , codi_barres=" + codi_barres +
+                " composicio='" + composicio + '\'' +
+                " }";
+    }
 }

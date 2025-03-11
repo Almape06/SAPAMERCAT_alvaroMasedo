@@ -1,9 +1,9 @@
 package MVC.Model;
 
 public abstract class Productes {
-    private String nom;
-    private float preu;
-    private int codi_barres;
+    String nom;
+    float preu;
+    int codi_barres;
 
     public Productes(String nom, float preu, int codi_barres) {
         this.nom = nom;

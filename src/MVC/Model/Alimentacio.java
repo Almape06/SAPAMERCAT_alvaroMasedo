@@ -1,12 +1,11 @@
 package MVC.Model;
-
 import java.time.LocalDate;
 import java.time.Period;
 
 
 import static java.time.LocalDate.now;
 
-public abstract class Alimentacio extends Productes implements CalcularData {
+public class Alimentacio extends Productes{
     private LocalDate data_caducitat;
 
 
@@ -21,6 +20,16 @@ public abstract class Alimentacio extends Productes implements CalcularData {
 
     public void setData_caducitat(LocalDate data_caducitat) {
         this.data_caducitat = data_caducitat;
+    }
+
+    @Override
+    public String toString() {
+        return "Alimentacio{ " +
+                " nom= '" + nom + '\'' +
+                ", preu= " + preu +
+                "€ , codi_barres= " + codi_barres +
+                " data_caducitat= " + data_caducitat +
+                " }";
     }
 
     public float calcularData(LocalDate data_actual, LocalDate data_Caducitat){

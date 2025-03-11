@@ -16,16 +16,66 @@ public class Controlador {
         Vista vista = new Vista();
         Model model = new Model();
         Scanner scan = new Scanner(System.in);
+        model.afegirProductesLlistes();
 
-        vista.mostrarMenuPrincipal();
-        int opcio = scan.nextInt();
+        int num = -10;
+        while (num != 0) {
+            vista.mostrarMenuPrincipal();;
+            num = scan.nextInt();
+            switch (num) {
+                case 1:
+                    menuMagatzem();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+            }
+        }
+    }
 
-        switch (opcio){
-            case 0:
-                System.out.println("Programa Acabat");
-                break;
-            case 1:
-                vista.mostrarMenuGestioMagatzem();
+    public static void menuMagatzem(){
+        Vista vista = new Vista();
+        Scanner scan = new Scanner(System.in);
+        Model model = new Model();
+
+        int num = -10;
+        while (num != 0){
+            vista.mostrarMenuGestioMagatzem();
+            num = scan.nextInt();
+            switch(num){
+                case 1:
+                    model.ordenarAliments();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    model.ordenarTextil();
+                    break;
+            }
+        }
+
+    }
+
+    public static void menuProductes(){
+        Vista vista = new Vista();
+        Scanner scan = new Scanner(System.in);
+        Model model = new Model();
+
+        int num = -10;
+        while (num != 0){
+            vista.mostrarMenuProducte();
+            num = scan.nextInt();
+            switch(num){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
         }
     }
 }
