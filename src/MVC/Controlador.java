@@ -27,10 +27,13 @@ public class Controlador {
                     menuMagatzem();
                     break;
                 case 2:
+                    menuProductes();
                     break;
                 case 3:
+                    Model.menuTiquet();
                     break;
                 case 4:
+                    Model.mostrarCarro();
                     break;
             }
         }
@@ -62,7 +65,6 @@ public class Controlador {
     public static void menuProductes(){
         Vista vista = new Vista();
         Scanner scan = new Scanner(System.in);
-        Model model = new Model();
 
         int num = -10;
         while (num != 0){
@@ -70,12 +72,54 @@ public class Controlador {
             num = scan.nextInt();
             switch(num){
                 case 1:
+                    menuAlimentacio();
                     break;
                 case 2:
+                    menuTextil();
                     break;
                 case 3:
+                    menuElectronica();
                     break;
             }
+        }
+    }
+
+    public static void menuAlimentacio(){
+        Scanner scan = new Scanner(System.in);
+        Model model = new Model();
+        Model.afegirAliment();
+        System.out.println("Vols afegir un altre aliment? Si(S), No(N) ");
+        String resposta = scan.nextLine();
+        while (resposta.equals("S") || resposta.equals("s") || resposta.equals("Si") || resposta.equals("si") || resposta.equals("SI") ){
+            Model.afegirAliment();
+            System.out.println("Vols afegir un altre aliment? Si(S), No(N) ");
+            resposta = scan.nextLine();
+        }
+    }
+
+    public static void menuTextil(){
+        Scanner scan = new Scanner(System.in);
+        Model model = new Model();
+        Model.afegirTextil();
+        System.out.println("Vols afegir un altre producte tèxtil? Si(S), No(N) ");
+        String resposta = scan.nextLine();
+        while (resposta.equals("S") || resposta.equals("s") || resposta.equals("Si") || resposta.equals("si") || resposta.equals("SI")){
+            Model.afegirTextil();
+            System.out.println("Vols afegir un altre producte tèxtil? Si(S), No(N) ");
+            resposta = scan.nextLine();
+        }
+    }
+
+    public static void menuElectronica(){
+        Scanner scan = new Scanner(System.in);
+        Model model = new Model();
+        Model.afegirElectronic();
+        System.out.println("Vols afegir un altre producte electrònic? Si(S), No(N) ");
+        String resposta = scan.nextLine();
+        while (resposta.equals("S") || resposta.equals("s") || resposta.equals("Si") || resposta.equals("si") || resposta.equals("SI")){
+            Model.afegirElectronic();
+            System.out.println("Vols afegir un altre producte electrònic? Si(S), No(N) ");
+            resposta = scan.nextLine();
         }
     }
 }

@@ -1,15 +1,15 @@
 package MVC.Model;
 
-import org.w3c.dom.Text;
-
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Comparator;
-import java.util.Collections;
+import java.util.*;
 
 public class Model {
      static List<Productes> magatzem = new LinkedList<>();
+
+    static Map<Alimentacio, Integer> detallAlimentacio = new HashMap<>();
+    static Map<Textil, Integer> detallTextil = new HashMap<>();
+    static Map<Electronica, Integer> detallElectronica = new HashMap<>();
+    static Map<String, Integer> productes = new HashMap<>();
 
     public static void afegirProductesLlistes(){
         LocalDate data1 = LocalDate.of(2025, 06, 15);
@@ -125,8 +125,6 @@ public class Model {
         }
     }
 
-
-
     public static void ordenarTextil(){
         List<Textil> textil = new LinkedList<>();
         for(Object objecte : magatzem){
@@ -140,5 +138,167 @@ public class Model {
             System.out.println(textils);
         }
     }
+
+
+    public static void afegirAliment(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Afegir aliment");
+        System.out.println("Nom producte: ");
+        String nom = scan.nextLine();
+
+        System.out.println("Preu: ");
+        float preu = scan.nextFloat();
+        scan.nextLine();
+
+        System.out.println("Codi de barres (6 digits): ");
+        int codiBarres = scan.nextInt();
+        scan.nextLine();
+
+        System.out.println("Data de caducitat (yyyy-mm-dd): ");
+        LocalDate dataCaducitat = LocalDate.parse(scan.nextLine().trim());
+
+        int cantidad = productes.getOrDefault(codiBarres, 0) + 1;
+        Alimentacio producte = new Alimentacio(nom, preu, codiBarres, dataCaducitat);
+        afegirCarroAliment(producte, cantidad);
+        System.out.println("Producte afegit correctament");
+    }
+
+    public static void afegirCarroAliment(Alimentacio a, int quantitat){
+        detallAlimentacio.put(a,quantitat);
+    }
+
+    public static void afegirTextil(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Afegir tèxtil");
+        System.out.println("Nom producte: ");
+        String nom = scan.nextLine();
+
+        System.out.println("Preu: ");
+        float preu = scan.nextFloat();
+        scan.nextLine();
+
+        System.out.println("Codi de barres (6 digits): ");
+        int codiBarres = scan.nextInt();
+        scan.nextLine();
+
+        System.out.println("Composició: ");
+        String composicio = scan.nextLine();
+
+        int cantidad = productes.getOrDefault(codiBarres, 0) + 1;
+        Textil producte = new Textil(nom, preu, codiBarres, composicio);
+        afegirCarroTextil(producte, cantidad);
+        System.out.println("Producte afegit correctament");
+    }
+
+    public static void afegirCarroTextil(Textil t, int quantitat){
+        detallTextil.put(t,quantitat);
+    }
+
+    public static void afegirElectronic(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Afegir electrònica");
+        System.out.println("Nom producte: ");
+        String nom = scan.nextLine();
+
+        System.out.println("Preu: ");
+        float preu = scan.nextFloat();
+        scan.nextLine();
+
+        System.out.println("Codi de barres (6 digits): ");
+        int codiBarres = scan.nextInt();
+        scan.nextLine();
+
+        System.out.println("Garantia (dies): ");
+        int garantia = scan.nextInt();
+
+        int cantidad = productes.getOrDefault(codiBarres, 0) + 1;
+        Electronica producte = new Electronica(nom, preu, codiBarres, garantia);
+        afegirCarro(producte, cantidad);
+        System.out.println("Producte afegit correctament");
+    }
+
+    public static void afegirCarro(Electronica e, int quantitat){
+        if (detallElectronica.containsKey(e)){
+            detallElectronica.replace(e, detallElectronica.get(e)+ 1);
+        } else{
+            detallElectronica.put(e, 1);
+        }
+    }
+
+    public static void mostrarCarro(){
+        System.out.println("Carret de compra:");
+
+        if (detallAlimentacio.isEmpty() && detallTextil.isEmpty() && detallElectronica.isEmpty())  {
+            System.out.println("El carro está buit.");
+            return;
+        }
+        System.out.println("\nProductes en el carro:\n");
+        for (Map.Entry<Alimentacio, Integer> mostrarAliments : detallAlimentacio.entrySet()){
+            Alimentacio aliments = mostrarAliments.getKey();
+            System.out.println(aliments.nom + " -> " + mostrarAliments.getValue() );
+        }
+
+        for (Map.Entry<Electronica, Integer> mostrarElectronica : detallElectronica.entrySet()){
+            Electronica electronica = mostrarElectronica.getKey();
+            System.out.println(electronica.nom + " -> " + mostrarElectronica.getValue() );
+        }
+
+        for (Map.Entry<Textil, Integer> mostrarTextils : detallTextil.entrySet()){
+            Textil textils = mostrarTextils.getKey();
+            System.out.println(textils.nom + " -> " + mostrarTextils.getValue() );
+        }
+
+    }
+
+    public static void menuTiquet() {
+        LocalDate today = LocalDate.now();
+        System.out.println("----------------------");
+        System.out.println("SAPAMERCAT");
+        System.out.println("----------------------");
+        System.out.println(today);
+        System.out.println("----------------------");
+
+        Map<String, Integer> contadorAliments = new HashMap<>();
+        Map<String, Integer> contadorElectronica = new HashMap<>();
+        Map<String, Integer> contadorTextil = new HashMap<>();
+
+        detallAlimentacio.forEach((producte, quantitat) -> {
+            String clave = producte.getCodi_barres() + "-" + producte.getPreu();
+            contadorAliments.put(clave, contadorAliments.getOrDefault(clave, 0) + quantitat);
+        });
+
+        detallElectronica.forEach((producte, quantitat) -> {
+            String clave = producte.getCodi_barres() + "-" + producte.getPreu();
+            contadorElectronica.put(clave, contadorElectronica.getOrDefault(clave, 0) + quantitat);
+        });
+
+        detallTextil.forEach((producte, quantitat) -> {
+            String clave = producte.getCodi_barres() + "-" + producte.getPreu();
+            contadorTextil.put(clave, contadorTextil.getOrDefault(clave, 0) + quantitat);
+        });
+
+        for (Map.Entry<String, Integer> entry : contadorAliments.entrySet()) {
+            String[] clave = entry.getKey().split("-");
+            String nomProducte = clave[0];
+            int quantitat = entry.getValue();
+            System.out.printf("%-20s %d\n", nomProducte, quantitat);
+        }
+
+        for (Map.Entry<String, Integer> entry : contadorElectronica.entrySet()) {
+            String[] clave = entry.getKey().split("-");
+            String nomProducte = clave[0];
+            int quantitat = entry.getValue();
+            System.out.printf("%-20s %d\n", nomProducte, quantitat);
+        }
+
+        System.out.println("\nTextil:");
+        for (Map.Entry<String, Integer> entry : contadorTextil.entrySet()) {
+            String[] clave = entry.getKey().split("-");
+            String nomProducte = clave[0];
+            int quantitat = entry.getValue();
+            System.out.printf("%-20s %d\n", nomProducte, quantitat);
+        }
+    }
+
 }
 

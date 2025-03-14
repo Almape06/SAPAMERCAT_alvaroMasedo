@@ -2,7 +2,7 @@ package MVC.Vista;
 
 public class Vista {
     public static void mostrarMenuPrincipal(){
-        System.out.println("BENVINGUT AL SAPAMERCAT");
+        System.out.println("\nBENVINGUT AL SAPAMERCAT");
         System.out.println("------------");
         System.out.println("---INICI---");
         System.out.println("------------");
@@ -32,4 +32,5 @@ public class Vista {
         System.out.println("3) Electrònica");
         System.out.println("0) Tornar");
     }
+
 }
