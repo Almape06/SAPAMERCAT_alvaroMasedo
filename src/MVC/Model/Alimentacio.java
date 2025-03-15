@@ -1,4 +1,6 @@
 package MVC.Model;
+import MVC.Exceptions.DataCaducitatException;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -11,6 +13,9 @@ public class Alimentacio extends Productes{
 
     public Alimentacio(String nom, float preu, int codi_barres, LocalDate data_caducitat) {
         super(nom, preu, codi_barres);
+        if (data_caducitat.isBefore(now())) {
+            throw new DataCaducitatException("La data de caducitat no pot ser anterior a la data actual.");
+        }
         this.data_caducitat = data_caducitat;
     }
 
@@ -19,6 +24,9 @@ public class Alimentacio extends Productes{
     }
 
     public void setData_caducitat(LocalDate data_caducitat) {
+        if (data_caducitat.isBefore(now())) {
+            throw new DataCaducitatException("La data de caducitat no pot ser anterior a la data actual.");
+        }
         this.data_caducitat = data_caducitat;
     }
 

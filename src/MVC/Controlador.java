@@ -1,6 +1,8 @@
 package MVC;
+import MVC.Exceptions.LimitProductesException;
 import MVC.Model.Model;
-import MVC.Vista.Vista;
+import MVC.Model.RegistreTiquet;
+    import MVC.Vista.Vista;
 import java.util.Scanner;
 
 public class Controlador {
@@ -12,7 +14,7 @@ public class Controlador {
         this.model1 = model1;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LimitProductesException {
         Vista vista = new Vista();
         Model model = new Model();
         Scanner scan = new Scanner(System.in);
@@ -43,6 +45,7 @@ public class Controlador {
         Vista vista = new Vista();
         Scanner scan = new Scanner(System.in);
         Model model = new Model();
+        RegistreTiquet registro = new RegistreTiquet();
 
         int num = -10;
         while (num != 0){
@@ -50,12 +53,13 @@ public class Controlador {
             num = scan.nextInt();
             switch(num){
                 case 1:
-                    model.ordenarAliments();
+                    Model.ordenarAliments();
                     break;
                 case 2:
+                    registro.mostrarTiquets();
                     break;
                 case 3:
-                    model.ordenarTextil();
+                    Model.ordenarTextil();
                     break;
             }
         }
