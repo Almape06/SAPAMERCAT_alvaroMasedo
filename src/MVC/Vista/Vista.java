@@ -1,5 +1,10 @@
 package MVC.Vista;
 
+/**
+ * Classe vista on guardem funcions amb els menús principals
+ * Guardem els menús principal, gestió del magatzem i Productes
+ */
+
 public class Vista {
     public static void mostrarMenuPrincipal(){
         System.out.println("\nBENVINGUT AL SAPAMERCAT");
